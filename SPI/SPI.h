@@ -6,8 +6,9 @@
 *************************************************************/
 
 /*						Configuration Bits SPI_CR1 Register						*/
-#define 	SPI_CR1_CLK_PHASE_RISE					((uint32_t)0 << 0)
-#define		SPI_CR1_CLK_PHASE_FALL					((uint32_t)1 << 0)
+#define 	SPI_CR1_CLK_PHASE_POS						(0U)
+#define 	SPI_CR1_CLK_PHASE_RISE					(0x00UL << SPI_CR1_CLK_PHASE_POS)
+#define		SPI_CR1_CLK_PHASE_FALL					(0x01UL << SPI_CR1_CLK_PHASE_POS)
 
 #define 	SPI_CR1_CLK_POL_0								((uint32_t)0 << 1)
 #define 	SPI_CR1_CLK_POL_1								((uint32_t)1 << 1)
@@ -24,8 +25,8 @@
 #define 	SPI_CR1_BAUD_RATE_128						((uint32_t)6 << 3)
 #define 	SPI_CR1_BAUD_RATE_256						((uint32_t)7 << 3)
 
-#define 	SPI_CR1_DISABLE									((uint32_t)0 << 6)
-#define 	SPI_CR1_ENABLE									((uint32_t)1 << 6)
+#define 	SPI_CR1_SPI_DISABLE							((uint32_t)0 << 6)
+#define 	SPI_CR1_SPI_ENABLE							((uint32_t)1 << 6)
 
 #define 	SPI_CR1_MSB_FRAME_FORMAT				((uint32_t)0 << 7)
 #define 	SPI_CR1_LSB_FRAME_FORMAT				((uint32_t)1 << 7)
@@ -75,6 +76,11 @@
 #define 	SPI3_CLK_ENABLE									(RCC->APB1ENR |= (1 << 15))
 #define 	SPI4_CLK_ENABLE									(RCC->APB2ENR |= (1 << 13))
 
+/*						Configuration Bits GPIO Clock Enable					*/
+#define 	GPIOA_CLK_ENABLE								(RCC->AHB1ENR |= (1 << 0))
+#define 	GPIOB_CLK_ENABLE								(RCC->AHB1ENR |= (1 << 1))
+#define 	GPIOC_CLK_ENABLE								(RCC->AHB1ENR |= (1 << 2))
+#define 	GPIOD_CLK_ENABLE								(RCC->AHB1ENR |= (1 << 3))
 
 /************************************************************
 							SPI Data Structures				
@@ -82,8 +88,8 @@
 
 typedef enum
 {
-		SPI_STATE_RXNE_FLAG				= 0x01,
-		SPI_STATE_TXE_FLAG				= 0x02,
+		SPI_STATE_RX_BUSY				= 0x01,
+		SPI_STATE_TX_BUSY				= 0x02,
 		SPI_STATE_UNDERRUN_FLAG		= 0x03,
 		SPI_STATE_MODE_FAULT_FLAG	= 0x05,
 		SPI_STATE_OVERRUN_FLAG		= 0x06,
@@ -116,6 +122,20 @@ typedef struct
 	spi_state		State;
 }spi_handle;
 
+typedef struct
+{
+	uint32_t		Mode;
+	uint32_t 		Output_Type;
+	uint32_t		Output_Speed;
+	uint32_t		Pull_Up_Down;
+}gpio_init;
+
+typedef struct
+{
+	GPIO_TypeDef *GPIO_Adress;
+	gpio_init			GPIO_init;
+	uint32_t 			PinState;
+}gpio_handle;
 
 /************************************************************
 							SPI Exposed Driver APIs 				
@@ -123,13 +143,13 @@ typedef struct
 
 void spi_initialize(spi_handle *spix);
 
-void spi_master_TX(spi_handle *spix, uint8_t txBuffer, uint32_t txMsgLen);
+void spi_master_TX(spi_handle *spix, uint8_t *txBuffer, uint32_t txMsgLen);
 
-void spi_master_RX(spi_handle *spix, uint8_t rxBuffer, uint32_t rxMsgLen);
+void spi_master_RX(spi_handle *spix, uint8_t *rxBuffer, uint32_t rxMsgLen);
 
-void spi_slave_TX(spi_handle *spix, uint8_t txBuffer, uint32_t txMsgLen);
+void spi_slave_TX(spi_handle *spix, uint8_t *txBuffer, uint32_t txMsgLen);
 
-void spi_slave_RX(spi_handle *spix, uint8_t rxBuffer, uint32_t rxMsgLen);
+void spi_slave_RX(spi_handle *spix, uint8_t *rxBuffer, uint32_t rxMsgLen);
 
 void spi_handle_interrupt(spi_handle *spix);
 

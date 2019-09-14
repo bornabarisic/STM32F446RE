@@ -1,6 +1,6 @@
 Dependencies for Project 'SPI', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x5D7A9D6E)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F446xx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (SPI.h)(0x5D7A94ED)
+F (.\main.c)(0x5D7CF4B1)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F446xx-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (SPI.h)(0x5D7D06D3)
 I (C:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f446xx.h)(0x5C5BE482)
 I (C:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25E516)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)
@@ -9,11 +9,11 @@ I (C:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D25E
 I (C:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D25E516)
 I (C:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu_armv7.h)(0x5C8FA234)
 I (C:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BE482)
-I (main.h)(0x5D7A9D77)
-F (.\main.h)(0x5D7A9D77)()
-F (.\SPI.h)(0x5D7A94ED)()
-F (.\SPI.c)(0x5D7A9A27)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F446xx-o .\objects\spi.o --omf_browse .\objects\spi.crf --depend .\objects\spi.d)
-I (SPI.h)(0x5D7A94ED)
+I (main.h)(0x5D7D06D2)
+F (.\main.h)(0x5D7D06D2)()
+F (.\SPI.h)(0x5D7D06D3)()
+F (.\SPI.c)(0x5D7D0703)(--c99 --gnu -c --cpu Cortex-M4.fp -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F446xx-o .\objects\spi.o --omf_browse .\objects\spi.crf --depend .\objects\spi.d)
+I (SPI.h)(0x5D7D06D3)
 I (C:\Keil_v5\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f446xx.h)(0x5C5BE482)
 I (C:\Keil_v5\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D25E516)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEBCE42)

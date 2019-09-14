@@ -6,6 +6,7 @@
 							Helper Functions				
 *************************************************************/
 
+/************ Helper Functions For spi_initialize function **/
 static void spi_mode_configure(SPI_TypeDef *SPIx, uint32_t mode){
 	if(mode){
 		SPIx->CR1 |= SPI_CR1_MASTER_MODE;
@@ -97,6 +98,39 @@ static void spi_sofware_slave_management(SPI_TypeDef *SPIx, uint32_t enable){
 		SPIx->CR1 |= SPI_CR1_SOFT_SLAVE_MANAG_DIS;
 	}
 }
+/************************************************************/
+
+
+/************ Helper Functions For spi_master_TX function **/
+static void spi_enable(SPI_TypeDef *SPIx){
+	if (SPIx->CR1 & SPI_CR1_SPI_DISABLE){
+		SPIx->CR1 |= SPI_CR1_SPI_ENABLE;
+	}
+}
+
+static void spi_disable(SPI_TypeDef *SPIx){
+	SPIx->CR1 |= SPI_CR1_SPI_DISABLE;
+}
+
+static void spi_enable_txe_interrupt(SPI_TypeDef *SPIx){
+	SPIx->CR2 |= SPI_CR2_TXNE_INT_ENABLE;
+}
+
+static void spi_disable_txe_interrupt(SPI_TypeDef *SPIx){
+	SPIx->CR2 |= SPI_CR2_TXNE_INT_DISABLE;
+}
+
+static void spi_enable_rxne_interrupt(SPI_TypeDef *SPIx){
+	SPIx->CR2 |= SPI_CR2_RXNE_INT_ENABLE;
+}
+
+static void spi_disable_rxne_interrupt(SPI_TypeDef *SPIx){
+	SPIx->CR2 |= SPI_CR2_RXNE_INT_DISABLE;
+}
+
+/************************************************************/
+
+
 
 
 /************************************************************
@@ -115,12 +149,46 @@ void spi_initialize(spi_handle *spix){
 	
 }
 
-void spi_master_TX(spi_handle *spix, uint8_t txBuffer, uint32_t txMsgLen);
+void spi_master_TX(spi_handle *spix, uint8_t *txBuffer, uint32_t txMsgLen){
+	uint32_t txCount 		= 0;
+	
+	spix->pTxBuffer 		= txBuffer;
+	spix->TxBufferLen 	= txMsgLen;
+	spix->TxBufferCount = txCount;	
+	
+	spix->State = SPI_STATE_TX_BUSY;
+	
+	spi_enable(spix->BaseAdress);
+	
+	spi_enable_txe_interrupt(spix->BaseAdress);
+}
 
-void spi_master_RX(spi_handle *spix, uint8_t rxBuffer, uint32_t rxMsgLen);
+void spi_master_RX(spi_handle *spix, uint8_t *rxBuffer, uint32_t rxMsgLen){
+	uint32_t rxCount = 0, txCount = 0, val;
+	
+	// dummy transmit data
+	spix->pTxBuffer 		= rxBuffer;
+	spix->TxBufferLen 	= rxMsgLen;
+	spix->TxBufferCount = txCount;
 
-void spi_slave_TX(spi_handle *spix, uint8_t txBuffer, uint32_t txMsgLen);
+	// received data to rx buffer
+	spix->pRxBuffer			= rxBuffer;
+	spix->RxBufferLen		= rxMsgLen;
+	spix->RxBufferLen		= rxCount;
+	
+	spix->State = SPI_STATE_RX_BUSY;
+	
+	spi_enable(spix->BaseAdress);
+	
+	// read from data register to make sure DR is empty before RXNE interrupt
+	val = spix->BaseAdress->DR;
+	
+	spi_enable_txe_interrupt(spix->BaseAdress);
+	spi_enable_rxne_interrupt(spix->BaseAdress);	
+}
 
-void spi_slave_RX(spi_handle *spix, uint8_t rxBuffer, uint32_t rxMsgLen);
+void spi_slave_TX(spi_handle *spix, uint8_t *txBuffer, uint32_t txMsgLen);
+
+void spi_slave_RX(spi_handle *spix, uint8_t *rxBuffer, uint32_t rxMsgLen);
 
 void spi_handle_interrupt(spi_handle *spix);

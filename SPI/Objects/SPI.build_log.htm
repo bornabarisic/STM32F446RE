@@ -17,20 +17,32 @@ Library Manager: ArmAr.exe V5.06 update 6 (build 750)
 Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
 CPU DLL:         SARMCM3.DLL V5.28.0.0
 Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      UL2CM3.DLL V1.162.16.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.6.0
 Dialog DLL:      TCM.DLL V1.36.2.0
  
 <h2>Project:</h2>
 C:\Users\db\Desktop\BORNA\Embedded\STM32F446\Keil\KeilWorkspace\SPI\SPI.uvprojx
-Project File Date:  09/12/2019
+Project File Date:  09/13/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'Target 1'
+Rebuild target 'Target 1'
 compiling main.c...
+compiling SPI.c...
+SPI.c(167): warning:  #550-D: variable "val"  was set but never used
+        uint32_t rxCount = 0, txCount = 0, val;
+SPI.c(111): warning:  #177-D: function "spi_disable"  was declared but never referenced
+  static void spi_disable(SPI_TypeDef *SPIx){
+SPI.c(119): warning:  #177-D: function "spi_disable_txe_interrupt"  was declared but never referenced
+  static void spi_disable_txe_interrupt(SPI_TypeDef *SPIx){
+SPI.c(127): warning:  #177-D: function "spi_disable_rxne_interrupt"  was declared but never referenced
+  static void spi_disable_rxne_interrupt(SPI_TypeDef *SPIx){
+SPI.c: 4 warnings, 0 errors
+assembling startup_stm32f446xx.s...
+compiling system_stm32f4xx.c...
 linking...
-Program Size: Code=808 RO-data=468 RW-data=0 ZI-data=1696  
-".\Objects\SPI.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=1000 RO-data=468 RW-data=0 ZI-data=1720  
+".\Objects\SPI.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -61,7 +73,7 @@ Package Vendor: Keil
       Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f446xx.s
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>
